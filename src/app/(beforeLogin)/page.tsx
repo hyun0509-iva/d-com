@@ -1,6 +1,6 @@
-import styles from "./page.module.css";
+import styles from "@/app/page.module.css";
 import Image from "next/image";
-import dLogo from "../../public/dlogo.png";
+import dLogo from "../../../public/dlogo.png";
 import Link from "next/link";
 
 export default function Main() {
