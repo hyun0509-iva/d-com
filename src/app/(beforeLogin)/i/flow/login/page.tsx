@@ -1,8 +1,7 @@
-import LoginModal from "@/app/(beforeLogin)/LoginModal";
+import LoginModal from "@/app/(beforeLogin)/_components/LoginModal";
 import React from "react";
 
 const Page = () => {
-  console.log("접근");
   return (
     <>
       <LoginModal />
