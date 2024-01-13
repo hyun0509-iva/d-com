@@ -1,26 +1,24 @@
 "use client";
 
-import style from './login.module.css';
-import {ChangeEventHandler, useState} from "react";
+import style from '@/app/(beforeLogin)/_components/login.module.css';
+import {useState} from "react";
 
 export default function LoginModal() {
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [id, setId] = useState();
+  const [password, setPassword] = useState();
+  const [message, setMessage] = useState();
+  const onSubmit = () => {};
+  const onClickClose = () => {};
 
-  const onChangeId: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setId(e.target.value);
-  };
+  const onChangeId = () => {};
 
-  const onChangePassword: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setPassword(e.target.value);
-  };
+  const onChangePassword = () => {};
 
   return (
     <div className={style.modalBackground}>
       <div className={style.modal}>
         <div className={style.modalHeader}>
-          <button className={style.closeButton} onClick={() => {}}>
+          <button className={style.closeButton} onClick={onClickClose}>
             <svg width={24} viewBox="0 0 24 24" aria-hidden="true"
                  className="r-18jsvk2 r-4qtqp9 r-yyyyoo r-z80fyv r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-19wmn03">
               <g>
@@ -31,7 +29,7 @@ export default function LoginModal() {
           </button>
           <div>로그인하세요.</div>
         </div>
-        <form onSubmit={() => {}}>
+        <form onSubmit={onSubmit}>
           <div className={style.modalBody}>
             <div className={style.inputDiv}>
               <label className={style.inputLabel} htmlFor="id">아이디</label>
