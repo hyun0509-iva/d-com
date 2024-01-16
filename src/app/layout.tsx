@@ -11,16 +11,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Z 무슨일이 일어나고 있나요?",
-  description: 'D.com inspired by X.com',
+  description: "D.com inspired by X.com",
 };
 
-export default function RootLayout({
-  children,
-}: IProps) {
+export default function RootLayout({ children }: IProps) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        {children}
+        <main>{children}</main>
       </body>
     </html>
   );
