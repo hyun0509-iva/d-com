@@ -1,23 +1,29 @@
-import style from './post.module.css';
+import style from "./post.module.css";
 import Link from "next/link";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ko";
+
+dayjs.extend(relativeTime);
+dayjs.locale('ko');
 
 export default function Post() {
   const target = {
     User: {
-      id: 'elonmusk',
-      nickname: 'Elon Musk',
-      image: '/yRsRRjGO.jpg',
+      id: "elonmusk",
+      nickname: "Elon Musk",
+      image: "/yRsRRjGO.jpg",
     },
-    content: '클론코딩 라이브로 하니 너무 힘들어요 ㅠㅠ',
+    content: "클론코딩 라이브로 하니 너무 힘들어요 ㅠㅠ",
     createdAt: new Date(),
     Images: [],
-  }
+  };
   return (
     <article className={style.post}>
       <div className={style.postWrapper}>
         <div className={style.postUserSection}>
           <Link href={`/${target.User.id}`} className={style.postUserImage}>
-            <img src={target.User.image} alt={target.User.nickname}/>
+            <img src={target.User.image} alt={target.User.nickname} />
             <div className={style.postShade} />
           </Link>
         </div>
@@ -27,19 +33,15 @@ export default function Post() {
               <span className={style.postUserName}>{target.User.nickname}</span>
               &nbsp;
               <span className={style.postUserId}>@{target.User.id}</span>
-              &nbsp;
-              ·
-              &nbsp;
+              &nbsp; · &nbsp;
             </Link>
-            <span className={style.postDate}>2024.01.03</span>
+            <span className={style.postDate}>{dayjs(target.createdAt).fromNow(true)}</span>
           </div>
           <div>{target.content}</div>
-          <div className={style.postImageSection}>
-
-          </div>
+          <div className={style.postImageSection}></div>
           <div>ActionButtons</div>
         </div>
       </div>
     </article>
-  )
+  );
 }
