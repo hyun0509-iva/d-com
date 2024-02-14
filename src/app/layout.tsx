@@ -1,7 +1,7 @@
+import { ReactNode } from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ReactNode } from "react";
 
 interface IProps {
   children: ReactNode;
