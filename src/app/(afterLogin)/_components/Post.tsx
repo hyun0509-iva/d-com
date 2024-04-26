@@ -6,6 +6,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import ActionButtons from "./ActionButtons";
 import PostArticle from "./PostArticle";
 import style from "./post.module.css";
+import PostImages from "./PostImages";
 
 dayjs.extend(relativeTime);
 dayjs.locale("ko");
@@ -28,7 +29,12 @@ export default function Post({ noImage }: IProps) {
   };
 
   if (Math.random() > 0.5 && !noImage) {
-    target.Images.push({ imageId: 1, link: faker.image.urlLoremFlickr() });
+    target.Images.push(
+      { imageId: 1, link: faker.image.urlLoremFlickr() }, /* 이미지 1개인 경우*/
+      { imageId: 2, link: faker.image.urlLoremFlickr() }, /* 이미지 2개인 경우 */
+      { imageId: 3, link: faker.image.urlLoremFlickr() }, /* 이미지 3개인 경우 */
+      // { imageId: 4, link: faker.image.urlLoremFlickr() }, /* 이미지 4개인 경우 */
+    );
     target.content = faker.lorem.text();
   }
 
@@ -55,14 +61,7 @@ export default function Post({ noImage }: IProps) {
           </div>
           <div>{target.content}</div>
           <div className={style.postImageSection}>
-            {target.Images && target.Images.length > 0 && (
-              <Link
-                href={`/${target.User.id}/status/${target.postId}/photo/${target.Images[0].imageId}`}
-                className={style.postImageSection}
-              >
-                <img src={target.Images[0]?.link} alt="" />
-              </Link>
-            )}
+            <PostImages post={target} />
           </div>
           <ActionButtons />
         </div>
