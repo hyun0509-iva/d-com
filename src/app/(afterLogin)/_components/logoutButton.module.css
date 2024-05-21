@@ -36,4 +36,8 @@
 .logOutButton:hover {
   background-color: rgba(15,20,25, 0.1);
   border-radius: 33px;
+
+  .logOutUserName {
+    display: block;
+  }
 }
