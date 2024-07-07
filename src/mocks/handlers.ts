@@ -2,6 +2,7 @@ import {http, HttpResponse, StrictResponse} from 'msw'
 import {faker} from "@faker-js/faker";
 
 function generateDate() {
+  // 랜덤 날짜
   const lastWeek = new Date(Date.now());
   lastWeek.setDate(lastWeek.getDate() - 7);
   return faker.date.between({
@@ -36,6 +37,7 @@ export const handlers = [
   }),
   http.post('/api/users', async ({ request }) => {
     console.log('회원가입');
+    // 에러를 response할 수 있음
     // return HttpResponse.text(JSON.stringify('user_exists'), {
     //   status: 403,
     // })
