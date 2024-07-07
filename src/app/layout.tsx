@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   description: "D.com inspired by X.com",
 };
 
-export default function RootLayout({ children }: IProps) {
+const RootLayout = ({ children }: IProps) => {
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -29,3 +29,5 @@ export default function RootLayout({ children }: IProps) {
     </html>
   );
 }
+
+export default RootLayout;

@@ -3,7 +3,7 @@
 import style from "@/app/(afterLogin)/[username]/profile.module.css";
 import { useRouter } from "next/navigation";
 
-export default function BackButton() {
+const BackButton = () => {
   const router = useRouter();
   const onClick = () => {
     router.back();
@@ -24,3 +24,5 @@ export default function BackButton() {
     </button>
   );
 }
+
+export default BackButton;

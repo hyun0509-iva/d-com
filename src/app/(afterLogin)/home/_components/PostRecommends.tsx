@@ -14,6 +14,8 @@ export default function PostRecommends() {
   const { data } = useQuery<IPost[]>({
     queryKey: ["posts", "recommends"],
     queryFn: getPostRecommends,
+    staleTime: 60 * 1000, //1분마다 refetch, fresh -> stale: 5분이라는 기준
+    gcTime: 300 * 1000
   });
 
   return data?.map((post: IPost) => <Post key={post.postId} post={post} />);

@@ -5,7 +5,7 @@ import style from "./logoutButton.module.css";
 import { Router } from "express";
 import { useRouter } from "next/navigation";
 
-export default function LogoutButton() {
+const LogoutButton = () => {
   const router = useRouter();
   const {data: me} = useSession();
 
@@ -37,3 +37,5 @@ export default function LogoutButton() {
     </button>
   )
 }
+
+export default LogoutButton;

@@ -2,6 +2,7 @@
 
 import {createContext, ReactNode, useState} from "react";
 
+// tab global state
 export const TabContext = createContext({
   tab: 'rec',
   setTab: (value: 'rec' | 'fol') => {},

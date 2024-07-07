@@ -15,9 +15,8 @@ type Props = {
   noImage?: boolean
   post: PostModel
 }
-export default function Post({ noImage, post }: Props) {
+const Post = ({ noImage, post }: Props) => {
   const target = post;
-
   return (
     <PostArticle post={target}>
       <div className={style.postWrapper}>
@@ -37,9 +36,9 @@ export default function Post({ noImage, post }: Props) {
               ·
               &nbsp;
             </Link>
-            <span className={style.postDate}>{dayjs(target.createdAt).fromNow(true)}</span>
+            <span className={style.postDate}>{dayjs(target?.createdAt).fromNow(true)}</span>
           </div>
-          <div>{target.content}</div>
+          <div>{target?.content}</div>
           {!noImage && <div>
             <PostImages post={target} />
           </div>}
@@ -49,3 +48,5 @@ export default function Post({ noImage, post }: Props) {
     </PostArticle>
   )
 }
+
+export default Post;

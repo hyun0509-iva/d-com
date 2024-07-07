@@ -2,12 +2,12 @@ import { auth } from "@/auth";
 import Main from "./_components/Main";
 import { redirect } from "next/navigation";
 
-export default async function Home() {
+const Home = async () => {
   const session = await auth();
-  if(session?.user) {
-    redirect('/home')
+  if (session?.user) {
+    redirect("/home");
   }
-  return (
-    <Main />
-  )
-}
+  return <Main />;
+};
+
+export default Home;
