@@ -1,37 +1,42 @@
-import Post from '@/app/(afterLogin)/_components/Post';
-import style from './profile.module.css';
+import {
+  dehydrate,
+  HydrationBoundary,
+  QueryClient,
+} from "@tanstack/react-query";
+import Post from "@/app/(afterLogin)/_components/Post";
+import style from "./profile.module.css";
+import { getUser } from "./_lib/getUser";
+import { getUserPosts } from "./_lib/getUserPosts";
+import UserPosts from "./_components/UserPosts";
+import UserInfo from "./_components/UserInfo";
 
 /* 유저 프로필 */
-export default function Profile() {
-  const user = {
-    id: 'zerohch0',
-    nickname: '제로초',
-    image: '/5Udwvqim.jpg'
-  };
+type Props = {
+  params: { username: string };
+};
+const Profile = async ({ params }: Props) => {
+  const { username } = params;
+  const queryClient = new QueryClient();
+  await queryClient.prefetchQuery({
+    queryKey: ["users", username],
+    queryFn: getUser,
+  });
+  await queryClient.prefetchQuery({
+    queryKey: ["posts", "users", username],
+    queryFn: getUserPosts,
+  });
+  const dehydratedState = dehydrate(queryClient);
+
   return (
     <main className={style.main}>
-      <h1>유저 프로필</h1>
-      <div className={style.header}>
-        <h3 className={style.headerTitle}>{user.nickname}</h3>
-      </div>
-      <div className={style.userZone}>
-        <div className={style.userImage}>
-          <img src={user.image} alt={user.id}/>
+      <HydrationBoundary>
+      <UserInfo username={username} />
+        <div>
+          <UserPosts username={username}/>
         </div>
-        <div className={style.userName}>
-          <div>{user.nickname}</div>
-          <div>@{user.id}</div>
-        </div>
-        <button className={style.followButton}>팔로우</button>
-      </div>
-      <div>
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-        <Post />
-      </div>
+      </HydrationBoundary>
     </main>
-  )
-}
+  );
+};
+
+export default Profile;

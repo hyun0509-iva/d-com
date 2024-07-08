@@ -16,7 +16,7 @@ export default function TweetModal() {
   const onChangeContent = () => {};
 
   const me = {
-    id: "donghyun0",
+    id: "hello123",
     image: "/5Udwvqim.jpg",
   };
 
