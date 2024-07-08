@@ -102,6 +102,7 @@ export const handlers = [
       ]
     )
   }),
+  /* 팔로잉한 유저 게시글 */
   http.get('/api/followingPosts', ({ request }) => {
     return HttpResponse.json(
       [
@@ -143,6 +144,7 @@ export const handlers = [
       ]
     )
   }),
+  /* 검색 */
   http.get('/api/search/:tag', ({ request, params }) => {
     const { tag } = params;
     return HttpResponse.json(
@@ -185,6 +187,7 @@ export const handlers = [
       ]
     )
   }),
+  /* 유저 게시글 */
   http.get('/api/users/:userId/posts', ({ request, params }) => {
     const { userId } = params;
     return HttpResponse.json(
@@ -227,6 +230,7 @@ export const handlers = [
       ]
     )
   }),
+  /* 유저 정보 */
   http.get('/api/users/:userId', ({ request, params }): StrictResponse<any> => {
     const {userId} = params;
     const found = User.find((v) => v.id === userId);
@@ -239,6 +243,7 @@ export const handlers = [
       status: 404,
     })
   }),
+  /* 상세 게시글 */
   http.get('/api/posts/:postId', ({ request, params }): StrictResponse<any> => {
     const {postId} = params;
     if (parseInt(postId as string) > 10) {
@@ -260,6 +265,8 @@ export const handlers = [
       },
     );
   }),
+
+  /* 답글 */
   http.get('/api/posts/:postId/comments', ({ request, params }) => {
     const { postId } = params;
     return HttpResponse.json(
@@ -302,9 +309,11 @@ export const handlers = [
       ]
     )
   }),
+  /* 팔로우 추천 */
   http.get('/api/followRecommends', ({ request}) => {
     return HttpResponse.json(User);
   }),
+  /* trends 목록 */
   http.get('/api/trends', ({ request }) => {
     return HttpResponse.json(
       [

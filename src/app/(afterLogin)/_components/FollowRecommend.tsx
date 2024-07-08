@@ -1,15 +1,13 @@
 "use client"
 import React from "react";
 import style from "./followRecommend.module.css";
+import { User } from "@/model/User";
 
-const FollowRecommend = () => {
+type Props = {
+  user: User;
+}
+const FollowRecommend = ({ user }: Props) => {
   const onFollow = () => {};
-
-  const user = {
-    id: 'elonmusk',
-    nickname: 'Elon Musk',
-    image: '/yRsRRjGO.jpg'
-  };
 
   return (
     <div className={style.container}>

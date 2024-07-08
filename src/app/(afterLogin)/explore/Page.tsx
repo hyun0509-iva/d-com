@@ -2,6 +2,7 @@ import React from "react";
 import SearchForm from "@/app/(afterLogin)/_components/SearchForm";
 import Trend from "@/app/(afterLogin)/_components/Trend";
 import style from "./explore.module.css";
+import TrendSection from "../_components/TrendSection";
 
 /* 탐색 */
 const Page = () => {
@@ -12,18 +13,7 @@ const Page = () => {
       </div>
       <div className={style.trend}>
         <h3>나를 위한 트렌드</h3>
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
-        <Trend />
+        <TrendSection />
       </div>
     </>
   );
