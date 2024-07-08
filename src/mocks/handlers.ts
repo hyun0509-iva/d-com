@@ -232,6 +232,7 @@ export const handlers = [
   }),
   /* 유저 정보 */
   http.get('/api/users/:userId', ({ request, params }): StrictResponse<any> => {
+    // HttpResponse.json과 다르면 StrictResponse 타입으로 설정
     const {userId} = params;
     const found = User.find((v) => v.id === userId);
     if (found) {
