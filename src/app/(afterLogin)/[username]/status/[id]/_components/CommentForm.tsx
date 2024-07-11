@@ -6,8 +6,8 @@ import { useQueryClient } from "@tanstack/react-query";
 
 type Props = {
   id?: string;
-}; 
-const CommentForm = ({ id = '1' }: Props) => {
+};
+const CommentForm = ({ id = "1" }: Props) => {
   const [content, setContent] = useState("");
   const imageRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<
@@ -55,8 +55,7 @@ const CommentForm = ({ id = '1' }: Props) => {
     }
   };
   const queryClient = useQueryClient();
-  const post = queryClient.getQueryData(['posts', id]);
-  console.log('post', post, id);
+  const post = queryClient.getQueryData(["posts", id]);
   if (!post) {
     return null;
   }
@@ -68,6 +67,11 @@ const CommentForm = ({ id = '1' }: Props) => {
         </div>
       </div>
       <div className={style.postInputSection}>
+        <textarea
+          value={content}
+          onChange={onChange}
+          placeholder="답글 게시하기"
+        />
         <div style={{ display: "flex" }}>
           {preview.map(
             (v, index) =>
@@ -121,6 +125,6 @@ const CommentForm = ({ id = '1' }: Props) => {
       </div>
     </form>
   );
-}
+};
 
 export default CommentForm;

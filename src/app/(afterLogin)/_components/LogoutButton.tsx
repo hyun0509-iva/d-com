@@ -9,12 +9,6 @@ const LogoutButton = () => {
   const router = useRouter();
   const {data: me} = useSession();
 
-  // const me = { // 임시로 내 정보 있는것처럼
-  //   id: 'donghyun0',
-  //   nickname: '이동현',
-  //   image: '/5Udwvqim.jpg',
-  // }
-
   if(!me?.user) return null;
 
   const onLogout = () => {
