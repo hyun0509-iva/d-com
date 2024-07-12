@@ -1,17 +1,11 @@
 "use client";
 
-import {
-  InfiniteData,
-  useInfiniteQuery,
-  useQuery,
-  useSuspenseInfiniteQuery,
-} from "@tanstack/react-query";
+import { InfiniteData, useSuspenseInfiniteQuery } from "@tanstack/react-query";
 import { Fragment, useEffect, useRef } from "react";
 import { getPostRecommends } from "@/app/(afterLogin)/home/_lib/getPostRecommends";
 import { Post as IPost } from "@/model/Post";
 import Post from "@/app/(afterLogin)/_components/Post";
 import { useInView } from "react-intersection-observer";
-import styles from "@/app/(afterLogin)/home/home.module.css";
 
 export default function PostRecommends() {
   const { data, fetchNextPage, hasNextPage, isFetching, isLoading, isPending } =
@@ -36,7 +30,7 @@ export default function PostRecommends() {
     threshold: 0,
     delay: 0,
   });
-
+  console.log({ data });
   useEffect(() => {
     if (inView) {
       !isFetching && hasNextPage && fetchNextPage();

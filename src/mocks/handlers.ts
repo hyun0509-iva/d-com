@@ -322,15 +322,15 @@ export const handlers = [
   http.get('/api/trends', ({ request }) => {
     return HttpResponse.json(
       [
-        {tagId: 1, title: '제로초', count: 1264},
-        {tagId: 2, title: '원초', count: 1264},
-        {tagId: 3, title: '투초', count: 1264},
-        {tagId: 4, title: '쓰리초', count: 1264},
-        {tagId: 5, title: '포초', count: 1264},
-        {tagId: 6, title: '파이브초', count: 1264},
-        {tagId: 7, title: '식스초', count: 1264},
-        {tagId: 8, title: '세븐초', count: 1264},
-        {tagId: 9, title: '나인초', count: 1264},
+        {tagId: 1, title: '쯔양 녹취록', count: 3264},
+        {tagId: 2, title: '구제역', count: 164},
+        {tagId: 3, title: '미세먼지', count: 2264},
+        {tagId: 4, title: '우크라이나 전쟁', count: 564},
+        {tagId: 5, title: '러시아 모스크바 타격 가능성', count: 4264},
+        {tagId: 6, title: '홍명보 국대', count: 1364},
+        {tagId: 7, title: '조국 검사', count: 1244},
+        {tagId: 8, title: '황하나', count: 1344},
+        {tagId: 9, title: 'GPT 효율적으로 사용하는 방법', count: 114},
       ]
     )
   }),

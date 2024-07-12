@@ -34,6 +34,7 @@ export const {
           cookies().set('connect.sid', parsed['connect.sid'], parsed); // 브라우저에 쿠키를 심어주는 것
         }
         if (!authResponse.ok) {
+          console.log('authResponse', authResponse)
           return null
         }
 

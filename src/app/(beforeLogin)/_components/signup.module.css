@@ -8,7 +8,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  /* background-color: rgba(0, 0, 0, 0.4); */
+  background-color: #fff;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,7 +19,8 @@
 }
 
 .modal {
-  background-color: rgb(var(--background-end-rgb));
+  background: #fff;
+  /* background-color: rgb(var(--background-end-rgb)); */
   position: relative;
   width: 100%;
   border-radius: 16px;
@@ -63,6 +65,7 @@
   height: 56px;
   position: relative;
   margin: 12px 0;
+  background-color: #fff;
 }
 .inputLabel {
   width: 100%;
@@ -87,6 +90,7 @@
   padding: 12px 8px 8px;
   outline: none;
   background: transparent;
+  color: #000
 }
 
 .modalFooter {

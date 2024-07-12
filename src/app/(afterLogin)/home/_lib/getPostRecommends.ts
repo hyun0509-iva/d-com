@@ -1,6 +1,6 @@
 type Props = { pageParam?: number };
 export const getPostRecommends = async ({pageParam}: Props) => {
-  const res = await fetch(`http://localhost:9090/api/postRecommends?cursor=${pageParam}`, {
+  const res = await fetch(`http://localhost:9090/api/posts/recommends?cursor=${pageParam}`, {
     next: {
       tags: ["posts", "recommends"],
     },
