@@ -11,6 +11,8 @@ function generateDate() {
   });
 }
 
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms))
+
 const User = [
   {id: 'elonmusk', nickname: 'Elon Musk', image: '/yRsRRjGO.jpg'},
   {id: 'hello123', nickname: '이동현', image: '/5Udwvqim.jpg'},
@@ -49,7 +51,7 @@ export const handlers = [
   }),
   http.get('/api/postRecommends', ({ request }) => {
     const url = new URL(request.url)
-    const cursor = parseInt(url.searchParams.get('cursor') as string) || 0
+    const cursor = parseInt(url.searchParams.get('cursor') as string) || 0 
     return HttpResponse.json(
       [
         {
@@ -103,7 +105,9 @@ export const handlers = [
     )
   }),
   /* 팔로잉한 유저 게시글 */
-  http.get('/api/followingPosts', ({ request }) => {
+  http.get('/api/followingPosts', async ({ request }) => {
+    // 데이터 지연하기
+    await delay(2000)
     return HttpResponse.json(
       [
         {
