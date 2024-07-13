@@ -10,6 +10,8 @@ import {
 import { Session } from "@auth/core/types";
 import TextareaAutosize from "react-textarea-autosize";
 import style from "./postForm.module.css";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Post } from "@/model/Post";
 
 type Props = {
   me: Session | null;
@@ -21,23 +23,59 @@ const PostForm = ({ me }: Props) => {
     Array<{ dataUrl: string; file: File } | null>
   >([]);
   const [content, setContent] = useState("");
-
+  const queryClient = useQueryClient();
+  
   const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
     setContent(e.target.value);
   };
-
-  const onSubmit: FormEventHandler = (e) => {
+  console.log(content);
+  const onSubmit: FormEventHandler = async (e) => {
     e.preventDefault();
+    console.log("submit");
     const formData = new FormData();
     formData.append("content", content);
     preview.forEach((p) => {
       p && formData.append("images", p.file);
     });
-    fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
-      method: "post",
-      credentials: "include",
-      body: formData,
-    });
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`,
+        {
+          method: "post",
+          credentials: "include",
+          body: formData,
+        }
+      );
+      if (response.status === 201) {
+        setContent("");
+        setPreview([]);
+        const newPost = await response.json();
+        /* home/추천 탭 */
+        queryClient.setQueryData(
+          ["posts", "recommends"],
+          (prevData: { pages: Post[][] }) => {
+            const shallow = { ...prevData, pages: [...prevData.pages] };
+            shallow.pages[0] = [...shallow.pages[0]];
+            shallow.pages[0].unshift(newPost);
+            return shallow;
+          }
+        );
+
+        /* home/팔로우중 탭 */
+        queryClient.setQueryData(
+          ["posts", "followings"],
+          (prevData: { pages: Post[][] }) => {
+            const shallow = { ...prevData, pages: [...prevData.pages] };
+            shallow.pages[0] = [...shallow.pages[0]];
+            shallow.pages[0].unshift(newPost);
+            return shallow;
+          }
+        );
+      }
+    } catch (err) {
+      console.error(err);
+      alert("업로드중 에러가 발생했습니다.")
+    }
   };
 
   const onClickButton = () => {
