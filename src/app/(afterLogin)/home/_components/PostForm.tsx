@@ -3,6 +3,7 @@
 import {
   ChangeEvent,
   ChangeEventHandler,
+  FormEvent,
   FormEventHandler,
   useRef,
   useState,
@@ -24,33 +25,27 @@ const PostForm = ({ me }: Props) => {
   >([]);
   const [content, setContent] = useState("");
   const queryClient = useQueryClient();
-  
-  const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    setContent(e.target.value);
-  };
-  console.log(content);
-  const onSubmit: FormEventHandler = async (e) => {
-    e.preventDefault();
-    console.log("submit");
-    const formData = new FormData();
-    formData.append("content", content);
-    preview.forEach((p) => {
-      p && formData.append("images", p.file);
-    });
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`,
-        {
-          method: "post",
-          credentials: "include",
-          body: formData,
-        }
-      );
-      if (response.status === 201) {
-        setContent("");
-        setPreview([]);
-        const newPost = await response.json();
-        /* home/추천 탭 */
+  const mutation = useMutation({
+    mutationFn: async (e: FormEvent) => {
+      e.preventDefault();
+      console.log("submit");
+      const formData = new FormData();
+      formData.append("content", content);
+      preview.forEach((p) => {
+        p && formData.append("images", p.file);
+      });
+      return await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
+        method: "post",
+        credentials: "include",
+        body: formData,
+      });
+    },
+    onSuccess: async (response, variable) => {
+      const newPost = await response.json();
+      setContent("");
+      setPreview([]);
+      /* home/추천 탭 */
+      if(queryClient.getQueryData(["posts", "recommends"])) {
         queryClient.setQueryData(
           ["posts", "recommends"],
           (prevData: { pages: Post[][] }) => {
@@ -60,8 +55,10 @@ const PostForm = ({ me }: Props) => {
             return shallow;
           }
         );
+      }
 
-        /* home/팔로우중 탭 */
+      /* home/팔로우중 탭 */
+      if(queryClient.getQueryData(["posts", "followings"])) {
         queryClient.setQueryData(
           ["posts", "followings"],
           (prevData: { pages: Post[][] }) => {
@@ -72,12 +69,16 @@ const PostForm = ({ me }: Props) => {
           }
         );
       }
-    } catch (err) {
-      console.error(err);
-      alert("업로드중 에러가 발생했습니다.")
-    }
-  };
+    },
+    onError: (error) => {
+      console.error(error);
+      alert("업로드중 에러가 발생했습니다.");
+    },
+  });
 
+  const onChange: ChangeEventHandler<HTMLTextAreaElement> = (e) => {
+    setContent(e.target.value);
+  };
   const onClickButton = () => {
     imageRef.current?.click();
   };
@@ -107,7 +108,7 @@ const PostForm = ({ me }: Props) => {
     }
   };
   return (
-    <form className={style.postForm} onSubmit={onSubmit}>
+    <form className={style.postForm} onSubmit={mutation.mutate}>
       <div className={style.postUserSection}>
         <div className={style.postUserImage}>
           <img

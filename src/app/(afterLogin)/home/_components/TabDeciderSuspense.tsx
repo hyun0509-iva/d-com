@@ -4,13 +4,13 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import { getPostRecommends } from "@/app/(afterLogin)/home/_lib/getPostRecommends";
+import { getFollowingPosts } from "../_lib/getFollowingPosts";
 
 const TabDeciderSuspense = async () => {
   const queryClient = new QueryClient();
   await queryClient.prefetchInfiniteQuery({
     queryKey: ["posts", "recommends"],
-    queryFn: getPostRecommends,
+    queryFn: getFollowingPosts,
     initialPageParam: 0,
   });
   const dehydratedState = dehydrate(queryClient);
