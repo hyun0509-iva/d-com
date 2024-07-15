@@ -4,6 +4,7 @@ export const getFollowRecommends = async () => {
     next: {
       tags: ['users', 'followRecommends'],
     },
+    credentials: 'include',
     cache: 'no-store',
   });
   // The return value is *not* serialized

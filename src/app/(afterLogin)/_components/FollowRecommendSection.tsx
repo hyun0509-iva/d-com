@@ -13,6 +13,7 @@ const FollowRecommendSection = () => {
     staleTime: 60 * 1000,
     gcTime: 300 * 1000,
   });
+  console.log({ data });
   return data?.map((user) => <FollowRecommend key={user.id} user={user} />);
 };
 
