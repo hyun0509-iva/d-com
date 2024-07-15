@@ -5,7 +5,6 @@ import { Hashtag } from "@/model/Hashtag";
 type Props = { trend: Hashtag };
 
 const Trend = ({ trend }: Props) => {
-  console.log(trend)
   return (
     <Link href={`/search?q=${encodeURIComponent(trend.title)}`} className={style.container}>
       <div className={style.count}>실시간트렌드</div>

@@ -27,8 +27,8 @@ const TrendSection = () => {
       <div className={style.trendBg}>
         <div className={style.trend}>
           <h3>나를 위한 트렌드</h3>
-          {data?.map((trend) => (
-            <Trend key={trend.tagId} trend={trend} />
+          {data?.map((trend, idx) => (
+            <Trend key={idx} trend={trend} />
           ))}
         </div>
       </div>
