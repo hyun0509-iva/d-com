@@ -12,8 +12,8 @@ interface IProps {
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Z 무슨일이 일어나고 있나요?",
-  description: "D.com inspired by X.com",
+  title: "D. 무슨일이 일어나고 있나요?",
+  description: "D.com inspired by D.com",
 };
 
 const RootLayout = ({ children }: IProps) => {

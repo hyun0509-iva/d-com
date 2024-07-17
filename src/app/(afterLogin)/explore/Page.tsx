@@ -1,8 +1,13 @@
 import React from "react";
 import SearchForm from "@/app/(afterLogin)/_components/SearchForm";
-import Trend from "@/app/(afterLogin)/_components/Trend";
 import style from "./explore.module.css";
 import TrendSection from "../_components/TrendSection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: '탐색하기 / D',
+  description: '탐색해보세요' 
+}
 
 /* 탐색 */
 const Page = () => {

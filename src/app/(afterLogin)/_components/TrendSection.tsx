@@ -11,7 +11,7 @@ import { Hashtag } from "@/model/Hashtag";
 
 const TrendSection = () => {
   const { data: session } = useSession();
-  const pathname = usePathname();
+
   const { data } = useQuery<Hashtag[]>({
     queryKey: ["trends"],
     queryFn: getTrends,
@@ -19,14 +19,13 @@ const TrendSection = () => {
     gcTime: 300 * 1000,
     enabled: !!session?.user,
   });
-  if (pathname === "/explore") return null; // '/explore'인 경우 아무것도 반환하지 않음
 
+  // const pathname = usePathname();
+  // if (pathname === '/explore') return null;
   if (session?.user) {
-    console.log(data);
     return (
       <div className={style.trendBg}>
         <div className={style.trend}>
-          <h3>나를 위한 트렌드</h3>
           {data?.map((trend, idx) => (
             <Trend key={idx} trend={trend} />
           ))}

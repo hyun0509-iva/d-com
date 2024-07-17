@@ -9,19 +9,37 @@ import CommentForm from "./_components/CommentForm";
 import SinglePost from "./_components/SinglePost";
 import Comments from "./_components/Comments";
 import { getComments } from "./_lib/getComments";
-import { getSinglePost } from "./_lib/getSinglePost";
+import { getSinglePostServer } from "./_lib/getSinglePostServer";
 import style from "./singlePost.module.css";
+import { getUserServer } from "../../_lib/getUserServer";
+import { Post } from "@/model/Post";
+import { Metadata } from "next";
+import { User } from "@/model/User";
 
 /* 유저 개별 게시글 */
 type Props = {
-  params: { id: string };
+  params: { id: string; username: string };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const user: User = await getUserServer({
+    queryKey: ["users", params.username],
+  });
+  const post: Post = await getSinglePostServer({
+    queryKey: ["posts", params.id],
+  });
+  return {
+    title: `D에서 ${user.nickname} 님 : (${post.content})`,
+    description: post.content,
+  };
+}
+
 const Page = async ({ params }: Props) => {
   const { id } = params;
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["posts", id],
-    queryFn: getSinglePost,
+    queryFn: getSinglePostServer,
   });
   await queryClient.prefetchQuery({
     queryKey: ["posts", id, "comments"],
@@ -39,7 +57,7 @@ const Page = async ({ params }: Props) => {
         <SinglePost id={id} />
         <CommentForm />
         <div>
-          <Comments id={id}/>
+          <Comments id={id} />
         </div>
       </HydrationBoundary>
     </div>

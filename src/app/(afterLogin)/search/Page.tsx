@@ -4,9 +4,19 @@ import SearchForm from "@/app/(afterLogin)/_components/SearchForm";
 import Tab from "@/app/(afterLogin)/search/_components/Tab";
 import Post from "@/app/(afterLogin)/_components/Post";
 import SearchResult from "./_components/SearchResult";
+import { Metadata } from "next";
 
 type Props = {
   searchParams: { q: string; f?: string; pf?: string };
+};
+//Promise<Metadata>
+export const generateMetadata = async ({
+  searchParams,
+}: Props): Promise<Metadata> => {
+  return {
+    title: `${searchParams.q} - 검색 / D`,
+    description: `${searchParams.q} - 검색 / D`,
+  };
 };
 
 const Search = ({ searchParams }: Props) => {
