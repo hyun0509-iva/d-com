@@ -23,7 +23,7 @@ const Post = ({ noImage, post }: Props) => {
     //원본이 들어있는 경우
     target = post.Original;
   }
-
+  console.log({ target });
   const stopPropagation: MouseEventHandler<HTMLAnchorElement> = (e) => {
     e.stopPropagation();
   };
@@ -72,7 +72,7 @@ const Post = ({ noImage, post }: Props) => {
               <Link
                 href={`/${target.Parent.User.id}`}
                 onClick={stopPropagation}
-                style={{color: 'rgb(29, 155, 240)'}}
+                style={{ color: "rgb(29, 155, 240)" }}
               >
                 @{target.Parent.User.id}에게 보내는 답글
               </Link>

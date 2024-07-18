@@ -1,6 +1,7 @@
 import Link from "next/link";
 import style from "@/app/(afterLogin)/_components/post.module.css";
 import cx from 'classnames';
+import { MouseEventHandler } from "react";
 
 type Props = {
   post: {
@@ -17,6 +18,10 @@ type Props = {
 }
 
 const PostImages = ({post}: Props) => {
+  const stopPropagation: MouseEventHandler<HTMLAnchorElement> = (e) => {
+    e.stopPropagation();
+  };
+
   if (!post.Images) return null;
   if (!post.Images.length) return null;
   if (post.Images.length === 1) {
@@ -24,9 +29,10 @@ const PostImages = ({post}: Props) => {
       <Link
         href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
         className={cx(style.postImageSection, style.oneImage)}
+        onClick={stopPropagation}
         style={{ backgroundImage: `url(${post.Images[0]?.link})`, backgroundSize: 'contain'}}
       >
-        <img src={post.Images[0]?.link} alt="" />
+        <img src={post.Images[0]?.link} alt="게시글 이미지" />
       </Link>
     )
   }
@@ -37,10 +43,12 @@ const PostImages = ({post}: Props) => {
       >
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
+          onClick={stopPropagation}
           style={{ backgroundImage: `url(${post.Images[0]?.link})`, backgroundSize: 'cover'}}>
         </Link>
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[1].imageId}`}
+          onClick={stopPropagation}
           style={{ backgroundImage: `url(${post.Images[1]?.link})`, backgroundSize: 'cover'}}>
         </Link>
       </div>
@@ -53,15 +61,18 @@ const PostImages = ({post}: Props) => {
       >
         <Link
           href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[0].imageId}`}
+          onClick={stopPropagation}
           style={{ backgroundImage: `url(${post.Images[0]?.link})`, backgroundSize: 'cover'}}>
         </Link>
         <div>
           <Link
             href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[1].imageId}`}
+            onClick={stopPropagation}
             style={{ backgroundImage: `url(${post.Images[1]?.link})`, backgroundSize: 'cover'}}>
           </Link>
           <Link
             href={`/${post.User.id}/status/${post.postId}/photo/${post.Images[2].imageId}`}
+            onClick={stopPropagation}
             style={{ backgroundImage: `url(${post.Images[2]?.link})`, backgroundSize: 'cover'}}>
           </Link>
         </div>
