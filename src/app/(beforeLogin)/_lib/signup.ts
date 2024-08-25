@@ -26,7 +26,7 @@ export default async (
   let shouldRedirect = false;
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/users`,
+      `${process.env.NEXT_PUBLIC_BASIC_URL}/api/users`,
       {
         method: "post",
         body: formData,

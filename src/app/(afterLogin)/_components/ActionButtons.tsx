@@ -32,7 +32,7 @@ const ActionButtons = ({ white, post }: IProps) => {
   const heart = useMutation({
     mutationFn: () => {
       return fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${postId}/heart`,
+        `${process.env.NEXT_PUBLIC_BASIC_URL}/api/posts/${postId}/heart`,
         {
           method: "post",
           credentials: "include",
@@ -155,7 +155,7 @@ const ActionButtons = ({ white, post }: IProps) => {
   const unHeart = useMutation({
     mutationFn: () => {
       return fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${postId}/heart`,
+        `${process.env.NEXT_PUBLIC_BASIC_URL}/api/posts/${postId}/heart`,
         {
           method: "delete",
           credentials: "include",
@@ -271,7 +271,7 @@ const ActionButtons = ({ white, post }: IProps) => {
   const repost = useMutation({
     mutationFn: () => {
       return fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/reposts`,
+        `${process.env.NEXT_PUBLIC_BASIC_URL}/api/posts/${post.postId}/reposts`,
         {
           method: "post",
           credentials: "include",
@@ -336,7 +336,7 @@ const ActionButtons = ({ white, post }: IProps) => {
   const deleteRepost = useMutation({
     mutationFn: () => {
       return fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/reposts`,
+        `${process.env.NEXT_PUBLIC_BASIC_URL}/api/posts/${post.postId}/reposts`,
         {
           method: "delete",
           credentials: "include",
@@ -418,7 +418,7 @@ const ActionButtons = ({ white, post }: IProps) => {
     router.push("/compose/tweet");
     // const formData = new FormData();
     // formData.append('content', '답글 테스트');
-    // fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${post.postId}/comments`, {
+    // fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/posts/${post.postId}/comments`, {
     //   method: 'post',
     //   credentials: 'include',
     //   body: formData

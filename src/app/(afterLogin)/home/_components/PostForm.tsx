@@ -34,7 +34,7 @@ const PostForm = ({ me }: Props) => {
       preview.forEach((p) => {
         p && formData.append("images", p.file);
       });
-      return await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts`, {
+      return await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/posts`, {
         method: "post",
         credentials: "include",
         body: formData,

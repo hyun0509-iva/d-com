@@ -6,7 +6,7 @@ export const getUserPosts: QueryFunction<Post[], [_1: string, _2: string, string
   console.log(queryKey);  
   const [_1, _2, username] = queryKey;
   console.log({username});
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${username}/posts?cursor=0`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/users/${username}/posts?cursor=0`, {
     next: {
       tags: ['posts', 'users', username],
     },

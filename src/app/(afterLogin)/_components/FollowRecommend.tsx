@@ -18,7 +18,7 @@ const FollowRecommend = ({ user }: Props) => {
   const follow = useMutation({
     mutationFn: (userId: string) => {
       return fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${userId}/follow`,
+        `${process.env.NEXT_PUBLIC_BASIC_URL}/api/users/${userId}/follow`,
         {
           credentials: "include",
           method: "post",
@@ -106,7 +106,7 @@ const FollowRecommend = ({ user }: Props) => {
   const unfollow = useMutation({
     mutationFn: (userId: string) => {
       return fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${userId}/follow`,
+        `${process.env.NEXT_PUBLIC_BASIC_URL}/api/users/${userId}/follow`,
         {
           credentials: "include",
           method: "delete",

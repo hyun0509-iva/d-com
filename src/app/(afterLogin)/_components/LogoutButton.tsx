@@ -24,7 +24,7 @@ const LogoutButton = ({ me }: Props) => {
       queryKey: ['users']
     })
     signOut().then(() => {
-      fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
+      fetch(`${process.env.NEXT_PUBLIC_BASIC_URL}/api/logout`, {
         method: 'post',
         credentials: 'include'
       })

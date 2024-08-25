@@ -8,7 +8,7 @@ export const getSinglePost = async ({
 }) => {
   const [_1, id] = queryKey;
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/posts/${id}`,
+    `${process.env.NEXT_PUBLIC_BASIC_URL}/api/posts/${id}`,
     {
       next: {
         tags: ["posts", id],
